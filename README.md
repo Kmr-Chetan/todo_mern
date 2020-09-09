@@ -8,6 +8,8 @@ to run this please follow below steps
 {
     "jwtSecret": "you secret"
 }
+4. run cmd "npm i" also do same in client folder to install node-modules
+5. last run "npm run dev"
 
 
 
