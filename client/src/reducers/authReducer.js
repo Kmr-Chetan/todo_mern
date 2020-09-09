@@ -14,6 +14,7 @@ const initialSate = {
   isAuthenticated: null,
   isLoading: false,
   user: null,
+  user_id: null
 };
 
 export default function (state = initialSate, action) {
@@ -29,6 +30,7 @@ export default function (state = initialSate, action) {
         isAuthenticated: true,
         isLoading: false,
         user: action.payload,
+        user_id: action.payload._id,
       };
     case LOGIN_SUCCESS:
     case REGISTER_SUCCESS:
@@ -38,6 +40,7 @@ export default function (state = initialSate, action) {
         ...action.payload,
         isAuthenticated: true,
         isLoading: false,
+        user_id: action.payload.id
       };
     case AUTH_ERROR:
     case LOGIN_FAIL:
