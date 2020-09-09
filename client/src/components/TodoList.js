@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { Container, ListGroup, ListGroupItem, Button } from "reactstrap";
 import { connect } from "react-redux";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
@@ -6,11 +6,14 @@ import { getItems, deleteItem } from "../actions/itemActions";
 import "./TodoList.css";
 
 class TodoList extends Component {
+
   componentDidUpdate(prevProps, prevState) {
     const { isAuthenticated, user_id } = this.props.auth;
     if (isAuthenticated !== null) {
       if (prevProps.auth.user_id !== user_id) {
-        this.props.getItems(user_id);
+        if(user_id){
+          this.props.getItems(user_id);
+        }
       }
     }
   }
@@ -35,7 +38,7 @@ class TodoList extends Component {
             {items &&
               items.map(({ _id, name, priority }) => (
                 <CSSTransition key={_id} timeout={500}>
-                  {isAuthenticated && (
+                  {isAuthenticated ? (
                     <ListGroupItem>
                       {name}
                       <span className="priorty">{priority}</span>
@@ -50,7 +53,8 @@ class TodoList extends Component {
                         delete
                       </Button>
                     </ListGroupItem>
-                  )}
+                  ): <Fragment/>}
+
                 </CSSTransition>
               ))}
           </TransitionGroup>
